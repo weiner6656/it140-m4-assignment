@@ -11,17 +11,37 @@
 START hilow_game
 
     # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    DISPLAY "Welcome to the higher/lower game, Bella!"    
+    PROMPT "Enter the lower bound: " INTO lower_bound
+    PROMPT "Enter the upper bound: " INTO upper_bound
+    WHILE lower_bound >= upper_bound DO
+        DISPLAY "The lower bound must be less than the upper bound."
+        PROMPT "Enter the lower bound: " INTO lower_bound
+        PROMPT "Enter the upper bound: " INTO upper_bound
+    END WHILE
 
     # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+        SET secret_number TO RANDOM_INTEGER(lower_bound, upper_bound)
+        SET guessed_correctly TO FALSE
 
     # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+        PROMPT "Enter your guess: " INTO guess
+        WHILE guessed_correctly = FALSE DO
+            IF guess < lower_bound OR guess > upper_bound THEN
+            DISPLAY "Your guess must be between " + lower_bound + " and " + upper_bound + "."
+            PROMPT "Enter your guess: " INTO guess
+        END IF
+    IF guess < secret_number THEN  
+        DISPLAY "Too low! Try a higher number."
+        PROMPT "Enter your guess: " INTO guess
+    ELSE IF guess > secret_number THEN
+       DISPLAY "Too high! Try a lower number."
+       PROMPT "Enter your guess: " INTO guess
+    ELSE
+       SET guessed_correctly TO TRUE
+       DISPLAY "You guessed it! Great job, Bella!"
+       END IF
+       END WHILE
 
 END hilow_game
 
